@@ -56,15 +56,15 @@ export class DataTableComponent implements OnInit {
   applyDelete(filterValue) {
     if(confirm("Are you sure?"))
     {
-      console.log();
-      console.log('HaHa '+ filterValue.RegNo);
-      console.log('HoHo ' + this.dataSource.data.length + " => " + this.dataSource.filteredData.length);
+      // console.log();
+      // console.log('HaHa '+ filterValue.RegNo);
+      // console.log('HoHo ' + this.dataSource.data.length + " => " + this.dataSource.filteredData.length);
   
       for(let i = 0 ; i<this.dataSource.data.length ; i++)
         if(this.dataSource.data[i].RegNo == filterValue.RegNo)
         {
           this.dataSource.data.splice(i,1);
-          console.log('HiHi ' + i);
+          // console.log('HiHi ' + i);
           break;
         }
         this.dataSource._updateChangeSubscription();
