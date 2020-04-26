@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-//import { DataTableDataSource, DataTableItem } from './data-table-datasource';
 
 import {MatTableDataSource} from '@angular/material/table';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import { ContactService } from '../service/contact.service';
 import { ContactComponent } from '../contact/contact.component';
+import { filter } from 'rxjs/operators';
 
 // TODO: Replace this with your own data model type
 export interface DataTableItem {
@@ -47,7 +47,10 @@ export class DataTableComponent implements OnInit {
     private _contactService?: ContactService
     ) { }
 
+  dataSource = new MatTableDataSource(EXAMPLE_DATA);
 
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['RegNo', 'name', 'Dept', 'CGPA', 'btnEdit', 'btnDel'];
 
   applyAdd()
   {
@@ -58,15 +61,62 @@ export class DataTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
-      this.dataSource._updateChangeSubscription();
+
+      let index:number = this._contactService._contactList.length-1;
+      let RegNo:number = this._contactService._contactList[index].RegNo;
+      let name:string = this._contactService._contactList[index].name;
+      let Dept:string = this._contactService._contactList[index].Dept;
+      let CGPA:number = this._contactService._contactList[index].CGPA;
+      // console.log(RegNo, name, Dept, CGPA);
+
+      if(!(RegNo.toString.length == 0 || CGPA.toString.length == 0 || Dept.length == 0 || name.length == 0))
+      {
+        this.dataSource.data.push({RegNo, name, Dept, CGPA});
+        this.dataSource._updateChangeSubscription();
+      }
+      // console.log("End");
+      this._contactService._contactList.splice(0, this._contactService._contactList.length);
     });
   }
 
-  //dataSource: DataTableDataSource;
-  dataSource = new MatTableDataSource(EXAMPLE_DATA);
+  applyEdit(filterValue) {
+    this.isPopupOpened = true;
+    const dialogRef = this.dialog.open(ContactComponent, {
+      data: {}
+    });
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['RegNo', 'name', 'Dept', 'CGPA', 'button'];
+    dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+      // console.log(this._contactService._contactList[0]);
+      //console.log(filterValue);
+
+      let lastIndex = this._contactService._contactList.length-1;
+      let RegNo:number = this._contactService._contactList[lastIndex].RegNo;
+      let name:string = this._contactService._contactList[lastIndex].name;
+      let Dept:string = this._contactService._contactList[lastIndex].Dept;
+      let CGPA:number = this._contactService._contactList[lastIndex].CGPA;
+
+      if(!(RegNo.toString.length == 0 || CGPA.toString.length == 0 || Dept.length == 0 || name.length == 0))
+      {
+        let index:number = -1;
+        for(let i = 0 ; i<this.dataSource.data.length ; i++)
+          if(this.dataSource.data[i].RegNo == filterValue.RegNo)
+          {
+            index = i;
+            break;
+          }
+        this.dataSource.data[index].RegNo = RegNo;
+        this.dataSource.data[index].name = name;
+        this.dataSource.data[index].Dept = Dept;
+        this.dataSource.data[index].CGPA = CGPA;
+  
+        this.dataSource._updateChangeSubscription();
+      }
+      // console.log("End");
+
+      this._contactService._contactList.splice(0, this._contactService._contactList.length);
+    });
+  }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;

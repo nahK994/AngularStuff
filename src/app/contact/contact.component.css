@@ -1,7 +1,11 @@
 .toolbar{
-    width: 55%;
+    width: 100%;
+    color: white;
+    background-color: lightseagreen;
+    border-radius: 5px;
 }
 
-.inputClass{
-    width: 50%;
+.row{
+    width: 80%;
+    margin: 10px 10px 10px 10px;
 }

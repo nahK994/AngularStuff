@@ -34,7 +34,16 @@
       <td mat-cell *matCellDef="let row">{{row.Dept}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="button">
+    <ng-container matColumnDef="btnEdit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="applyEdit(row)" aria-label="Example icon-button with a heart icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="btnDel">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <button mat-icon-button color="warn" (click)="applyDelete(row)" aria-label="Example icon-button with a heart icon">

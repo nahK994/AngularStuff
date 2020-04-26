@@ -13,5 +13,7 @@ export class ContactService {
   addContact(contact: Contact)
   {
     this._contactList.push(contact);
+    // console.log(contact);
+    // console.log(this._contactList);
   }
 }

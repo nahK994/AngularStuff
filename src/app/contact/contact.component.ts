@@ -21,9 +21,8 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this._contactForm = this._formBuilder.group({
-      ID: [],
       RegNo: ['', [Validators.required]],
-      Name: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       Dept: ['', [Validators.required]],
       CGPA: ['', [Validators.required]]
     });
@@ -36,7 +35,7 @@ export class ContactComponent implements OnInit {
 
   onSubmit()
   {
-    console.log("HaHa");
+    // console.log("HaHa");
     this._contactService.addContact(this._contactForm.value);
     this.dialogRef.close();
   }
