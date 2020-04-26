@@ -5,6 +5,9 @@ import { MatTable } from '@angular/material/table';
 //import { DataTableDataSource, DataTableItem } from './data-table-datasource';
 
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { ContactService } from '../service/contact.service';
+import { ContactComponent } from '../contact/contact.component';
 
 // TODO: Replace this with your own data model type
 export interface DataTableItem {
@@ -36,6 +39,29 @@ export class DataTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatTable, {static: false}) table: MatTable<DataTableItem>;
+
+  isPopupOpened = false;
+
+  constructor(
+    private dialog?: MatDialog,
+    private _contactService?: ContactService
+    ) { }
+
+
+
+  applyAdd()
+  {
+    this.isPopupOpened = true;
+    const dialogRef = this.dialog.open(ContactComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+      this.dataSource._updateChangeSubscription();
+    });
+  }
+
   //dataSource: DataTableDataSource;
   dataSource = new MatTableDataSource(EXAMPLE_DATA);
 
@@ -43,7 +69,6 @@ export class DataTableComponent implements OnInit {
   displayedColumns = ['RegNo', 'name', 'Dept', 'CGPA', 'button'];
 
   ngOnInit() {
-    //this.dataSource = new DataTableDataSource();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -56,15 +81,10 @@ export class DataTableComponent implements OnInit {
   applyDelete(filterValue) {
     if(confirm("Are you sure?"))
     {
-      // console.log();
-      // console.log('HaHa '+ filterValue.RegNo);
-      // console.log('HoHo ' + this.dataSource.data.length + " => " + this.dataSource.filteredData.length);
-  
       for(let i = 0 ; i<this.dataSource.data.length ; i++)
         if(this.dataSource.data[i].RegNo == filterValue.RegNo)
         {
           this.dataSource.data.splice(i,1);
-          // console.log('HiHi ' + i);
           break;
         }
         this.dataSource._updateChangeSubscription();

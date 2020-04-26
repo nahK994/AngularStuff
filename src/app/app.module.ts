@@ -13,13 +13,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { ContactComponent } from './contact/contact.component';
+import { from } from 'rxjs';
+import { ContactService } from './service/contact.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DataTableComponent
+    DataTableComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -31,13 +39,19 @@ import {MatIconModule} from '@angular/material/icon';
 
     FormsModule,
     ReactiveFormsModule,
+    BrowserModule,
     MatInputModule,
     MatFormFieldModule,
 
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+
+    MatDialogModule,
+    MatCardModule,
+    MatToolbarModule
   ],
-  providers: [],
+  providers: [ContactService],
+  entryComponents: [ContactComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
