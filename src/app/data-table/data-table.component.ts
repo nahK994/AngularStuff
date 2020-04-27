@@ -81,7 +81,7 @@ export class DataTableComponent implements OnInit {
         this.dataSource._updateChangeSubscription();
       }
       // console.log("End");
-      this._contactService._contactList.splice(0, this._contactService._contactList.length);
+      // this._contactService._contactList.splice(0, this._contactService._contactList.length);
     });
   }
 
@@ -125,7 +125,7 @@ export class DataTableComponent implements OnInit {
       }
       // console.log("End");
 
-      this._contactService._contactList.splice(0, this._contactService._contactList.length);
+      // this._contactService._contactList.splice(0, this._contactService._contactList.length);
     });
   }
 
