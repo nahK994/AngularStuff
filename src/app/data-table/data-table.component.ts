@@ -5,7 +5,7 @@ import { MatTable } from '@angular/material/table';
 
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialogRef, MatDialog, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
-import { ContactService } from '../service/contact.service';
+// import { ContactService } from '../service/contact.service';
 import { ContactComponent } from '../contact/contact.component';
 import { filter } from 'rxjs/operators';
 import { INT_TYPE } from '@angular/compiler/src/output/output_ast';
@@ -45,7 +45,7 @@ export class DataTableComponent implements OnInit {
 
   constructor(
     private dialog?: MatDialog,
-    private _contactService?: ContactService
+    //private _contactService?: ContactService
     ) { }
 
   dataSource = new MatTableDataSource(EXAMPLE_DATA);

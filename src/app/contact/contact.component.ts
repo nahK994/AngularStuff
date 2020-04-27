@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ContactService } from '../service/contact.service';
+// import { ContactService } from '../service/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ContactComponent>,
-    private _contactService: ContactService,
+    //private _contactService: ContactService,
     @Inject(MAT_DIALOG_DATA) public data:any
     ) { }
 

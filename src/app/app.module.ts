@@ -21,7 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { ContactComponent } from './contact/contact.component';
 import { from } from 'rxjs';
-import { ContactService } from './service/contact.service';
+// import { ContactService } from './service/contact.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { ContactService } from './service/contact.service';
     MatCardModule,
     MatToolbarModule
   ],
-  providers: [ContactService],
+  providers: [],
+  // providers: [ContactService],
   entryComponents: [ContactComponent],
   bootstrap: [AppComponent]
 })
