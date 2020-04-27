@@ -36,6 +36,12 @@ export class ContactComponent implements OnInit {
   onSubmit()
   {
     // console.log("HaHa");
+    localStorage.setItem("RegNo", this._contactForm.value.RegNo);
+    localStorage.setItem("Dept", this._contactForm.value.Dept);
+    localStorage.setItem("name", this._contactForm.value.name);
+    localStorage.setItem("CGPA", this._contactForm.value.CGPA);
+
+    
     this._contactService.addContact(this._contactForm.value);
     this.dialogRef.close();
   }

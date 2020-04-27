@@ -8,6 +8,7 @@ import { MatDialogRef, MatDialog, throwMatDialogContentAlreadyAttachedError } fr
 import { ContactService } from '../service/contact.service';
 import { ContactComponent } from '../contact/contact.component';
 import { filter } from 'rxjs/operators';
+import { INT_TYPE } from '@angular/compiler/src/output/output_ast';
 
 // TODO: Replace this with your own data model type
 export interface DataTableItem {
@@ -62,11 +63,16 @@ export class DataTableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
 
-      let index:number = this._contactService._contactList.length-1;
-      let RegNo:number = this._contactService._contactList[index].RegNo;
-      let name:string = this._contactService._contactList[index].name;
-      let Dept:string = this._contactService._contactList[index].Dept;
-      let CGPA:number = this._contactService._contactList[index].CGPA;
+      // let index:number = this._contactService._contactList.length-1;
+      // let RegNo:number = this._contactService._contactList[index].RegNo;
+      // let name:string = this._contactService._contactList[index].name;
+      // let Dept:string = this._contactService._contactList[index].Dept;
+      // let CGPA:number = this._contactService._contactList[index].CGPA;
+
+      let RegNo:number = Number(localStorage.getItem("RegNo"));
+      let name:string = localStorage.getItem("name");
+      let Dept:string = localStorage.getItem("Dept");
+      let CGPA:number = Number(localStorage.getItem("CGPA"));
       // console.log(RegNo, name, Dept, CGPA);
 
       if(!(RegNo.toString.length == 0 || CGPA.toString.length == 0 || Dept.length == 0 || name.length == 0))
@@ -90,11 +96,16 @@ export class DataTableComponent implements OnInit {
       // console.log(this._contactService._contactList[0]);
       //console.log(filterValue);
 
-      let lastIndex = this._contactService._contactList.length-1;
-      let RegNo:number = this._contactService._contactList[lastIndex].RegNo;
-      let name:string = this._contactService._contactList[lastIndex].name;
-      let Dept:string = this._contactService._contactList[lastIndex].Dept;
-      let CGPA:number = this._contactService._contactList[lastIndex].CGPA;
+      // let lastIndex = this._contactService._contactList.length-1;
+      // let RegNo:number = this._contactService._contactList[lastIndex].RegNo;
+      // let name:string = this._contactService._contactList[lastIndex].name;
+      // let Dept:string = this._contactService._contactList[lastIndex].Dept;
+      // let CGPA:number = this._contactService._contactList[lastIndex].CGPA;
+
+      let RegNo:number = Number(localStorage.getItem("RegNo"));
+      let name:string = localStorage.getItem("name");
+      let Dept:string = localStorage.getItem("Dept");
+      let CGPA:number = Number(localStorage.getItem("CGPA"));
 
       if(!(RegNo.toString.length == 0 || CGPA.toString.length == 0 || Dept.length == 0 || name.length == 0))
       {
