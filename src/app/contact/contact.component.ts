@@ -42,7 +42,7 @@ export class ContactComponent implements OnInit {
     localStorage.setItem("CGPA", this._contactForm.value.CGPA);
 
     
-    this._contactService.addContact(this._contactForm.value);
+    //this._contactService.addContact(this._contactForm.value);
     this.dialogRef.close();
   }
 }
